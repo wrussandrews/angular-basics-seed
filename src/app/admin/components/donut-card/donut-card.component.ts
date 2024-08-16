@@ -4,17 +4,21 @@ import {Donut} from "../../models/donut.model";
 @Component({
   selector: 'donut-card',
   template:  `
-        <img src="/assets/img/{{donut.icon}}.svg"
-             [alt]="donut.name" class="donut-card-icon"/>
-
-        <div>
-          <p class="donut-card-name">{{donut.name}}</p>
-          <p class="donut-card-price">{{donut.price}}</p>
-        </div>
+        <div class="donut-card"
+             [ngClass]="{
+                'donut-card-promo': donut.promo
+             }">
+          <img src="/assets/img/{{donut.icon}}.svg"
+               [alt]="donut.name"
+               class="donut-card-icon"/>
+          <div>
+            <p class="donut-card-name">{{donut.name}}</p>
+            <p class="donut-card-price">{{donut.price / 100 | currency}}</p>
+          </div>
+       </div>
   `,
   styles: [
-    `
-      :host {
+    `      .donut-card {
         display: flex;
         align-items: center;
         background: #f7f7f7;
@@ -25,8 +29,11 @@ import {Donut} from "../../models/donut.model";
         &:hover {
           transform: translateY(-3px);
         }
-      }
-      .donut-card {
+
+        &-promo {
+          border: 2px solid #eee;
+        }
+
         &-name {
           font-size: 16px;
         }
@@ -39,6 +46,7 @@ import {Donut} from "../../models/donut.model";
           margin-right: 10px;
         }
       }
+
     `,
   ]
 })
