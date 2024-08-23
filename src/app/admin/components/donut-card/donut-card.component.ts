@@ -16,11 +16,16 @@ import {Donut} from "../../models/donut.model";
               {{donut.name}}
 
               <ng-container [ngSwitch]="donut.promo">
-                <span class="donut-card-label">
-                    <ng-template [ngSwitchCase]="'new'">NEW</ng-template>
-                    <ng-template [ngSwitchCase]="'limited'">LIMITED</ng-template>
-                    <ng-template ngSwitchDefault>Nothing Special...</ng-template>
-                </span>
+                <ng-container *ngSwitchCase="'new'">
+                  <span class="donut-card-label">
+                      NEW
+                  </span>
+                </ng-container>
+                <ng-container *ngSwitchCase="'limited'">
+                  <span class="donut-card-label">
+                      LIMITED
+                  </span>
+                </ng-container>
               </ng-container>
 
 
