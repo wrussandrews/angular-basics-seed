@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {tap, of, map} from "rxjs";
+import {tap, of, map, catchError, throwError} from "rxjs";
 
 import {Donut} from "../models/donut.model";
 
@@ -68,6 +68,10 @@ export class DonutService {
             return item;
           });
 
+        }),
+        catchError((err) => {
+          console.warn(err);
+          return throwError(() => new Error(err.message));
         })
       );
   }
