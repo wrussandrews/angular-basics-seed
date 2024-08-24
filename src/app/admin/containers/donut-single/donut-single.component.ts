@@ -26,5 +26,4 @@ export class DonutSingleComponent implements OnInit {
   ngOnInit(): void {
     this.donut = this.donutService.readOne('55555');
   }
-
 }
