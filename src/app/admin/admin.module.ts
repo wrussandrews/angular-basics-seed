@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import {Routes, RouterModule} from '@angular/router';
 
 //Containers
 
@@ -13,6 +13,14 @@ import { DonutCardComponent } from './components/donut-card/donut-card.component
 import { DonutFormComponent } from './components/donut-form/donut-form.component';
 import {FormsModule} from "@angular/forms";
 
+
+export const routes: Routes = [
+    { path: "donuts", component: DonutListComponent},
+    { path: 'donuts/new', component: DonutSingleComponent},
+    { path: 'donuts/:id', component: DonutSingleComponent},
+    { path: '', pathMatch: 'full', redirectTo: 'donuts' },
+  ]
+
 @NgModule({
   declarations: [
     DonutListComponent,
@@ -23,10 +31,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule
+    RouterModule.forChild(routes),
   ],
-  exports: [
-    DonutListComponent, DonutSingleComponent
-  ]
+  exports: [ ]
 })
 export class AdminModule { }

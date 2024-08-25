@@ -38,7 +38,7 @@ export class DonutService {
       );
   }
 
-  readOne(id: string)
+  readOne(id: string | null)
   {
     return this.read().pipe(
       map((donuts) => {

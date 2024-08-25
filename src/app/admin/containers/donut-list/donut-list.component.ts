@@ -6,6 +6,14 @@ import {DonutService} from "../../services/donut.service";
   selector: 'donut-list',
   template: `
     <div>
+
+      <div class="donut-list-actions">
+        <a routerLink="new" class="btn btn--green">
+          New Donut
+          <img src="/assets/img/icon/plus.svg"/>
+        </a>
+      </div>
+
       <ng-container *ngIf="donuts?.length; else nothing">
         <donut-card *ngFor="let donut of donuts; trackBy: trackById"
           [donut]="donut"></donut-card>
@@ -17,7 +25,7 @@ import {DonutService} from "../../services/donut.service";
 
     </div>
   `,
-  styles: [ ]
+  styles: [`.donut-list {&-actions {margin-bottom: 10px}}`]
 })
 export class DonutListComponent implements OnInit {
   donuts!: Donut[];

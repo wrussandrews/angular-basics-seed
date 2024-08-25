@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Donut} from "../../models/donut.model";
 import {DonutService} from "../../services/donut.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'donut-single',
@@ -36,11 +37,14 @@ export class DonutSingleComponent implements OnInit {
     this.donutService.delete(donut).subscribe(() => console.log("Successfully updated"));
   }
 
-  constructor(private donutService: DonutService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private donutService: DonutService) {}
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
     this.donutService
-      .readOne('qAKfqht')
+      .readOne(id)
       .subscribe((donut: Donut) => this.donut = donut);
   }
 }
