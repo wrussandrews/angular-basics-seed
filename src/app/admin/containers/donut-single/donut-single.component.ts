@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Donut} from "../../models/donut.model";
 import {DonutService} from "../../services/donut.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'donut-single',
@@ -24,13 +24,13 @@ export class DonutSingleComponent implements OnInit {
 
   onCreate(donut: Donut)
   {
-    this.donutService.create(donut).subscribe(() => console.log("Successfully created"));
+    this.donutService.create(donut).subscribe((donut) => this.router.navigate(['admin', 'donuts', donut.id]));
   }
 
   onUpdate(donut: Donut)
   {
     this.donutService.update(donut).subscribe({
-      next: () => console.log("Successfully updated!"),
+      next: () => this.router.navigate(['admin']),
       error:(err) =>
         console.log('onUpdate Error', err),
       });
@@ -38,11 +38,12 @@ export class DonutSingleComponent implements OnInit {
 
   onDelete(donut: Donut)
   {
-    this.donutService.delete(donut).subscribe(() => console.log("Successfully updated"));
+    this.donutService.delete(donut).subscribe(() => this.router.navigate(['admin']));
   }
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private donutService: DonutService) {}
 
   ngOnInit(): void {
