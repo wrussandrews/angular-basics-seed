@@ -7,8 +7,11 @@ import {ActivatedRoute} from "@angular/router";
   selector: 'donut-single',
   template: `
     <div>
-      <donut-form [donut]="donut" (create)="onCreate($event)"
-                  (update)="onUpdate($event)" (delete)="onDelete($event)"></donut-form>
+      <donut-form [donut]="donut"
+                  [isEdit]="isEdit"
+                  (create)="onCreate($event)"
+                  (update)="onUpdate($event)"
+                  (delete)="onDelete($event)"></donut-form>
     </div>
   `,
   styles: [
@@ -17,6 +20,7 @@ import {ActivatedRoute} from "@angular/router";
 export class DonutSingleComponent implements OnInit {
 
   donut!: Donut;
+  isEdit!: boolean;
 
   onCreate(donut: Donut)
   {
@@ -46,5 +50,8 @@ export class DonutSingleComponent implements OnInit {
     this.donutService
       .readOne(id)
       .subscribe((donut: Donut) => this.donut = donut);
+
+    this.isEdit = this.route.snapshot.data['isEdit'];
   }
+
 }

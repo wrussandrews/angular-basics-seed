@@ -16,8 +16,8 @@ import {FormsModule} from "@angular/forms";
 
 export const routes: Routes = [
     { path: "donuts", component: DonutListComponent},
-    { path: 'donuts/new', component: DonutSingleComponent},
-    { path: 'donuts/:id', component: DonutSingleComponent},
+    { path: 'donuts/new', component: DonutSingleComponent, data: { isEdit: false } },
+    { path: 'donuts/:id', component: DonutSingleComponent, data: { isEdit: true }},
     { path: '', pathMatch: 'full', redirectTo: 'donuts' },
   ]
 
